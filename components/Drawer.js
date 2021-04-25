@@ -1,0 +1,104 @@
+import {
+  Box,
+  Flex,
+  Container,
+  IconButton,
+  useDisclosure,
+  Drawer,
+  DrawerOverlay,
+  DrawerContent,
+  Text,
+  Avatar,
+  Stack,
+  Center,
+  Divider,
+  Icon,
+  DrawerCloseButton,
+} from '@chakra-ui/react'
+import { MdDashboard, MdBookmark } from 'react-icons/md'
+import { RiTableAltFill } from 'react-icons/ri'
+import { FaChartBar, FaMap, FaRocket } from 'react-icons/fa'
+import { AiFillIdcard } from 'react-icons/ai'
+import Link from 'next/link'
+import { HamburgerIcon } from '@chakra-ui/icons'
+import { Footer } from './Footer'
+import * as React from 'react'
+
+export const ResponsiveSidebar = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const btnRef = React.useRef()
+  return (
+    <>
+      <IconButton
+        variant='link'
+        size='xl'
+        color='dark'
+        icon={<HamburgerIcon />}
+        ref={btnRef}
+        minW='0'
+        onClick={onOpen}
+      />
+      <Drawer
+        isOpen={isOpen}
+        placement='left'
+        onClose={onClose}
+        finalFocusRef={btnRef}>
+        <DrawerOverlay>
+          <DrawerContent bg='dark' m={0} py={5}>
+            <DrawerCloseButton />
+            <Stack h='100%'>
+              <Box p={3} w='100%' display='block'>
+                <Stack direction='row'>
+                  <Avatar bg='highlight' name='John Doe' />
+                  <Box>
+                    <Text fontWeight='600'>John Doe</Text>
+                    <Text fontSize='xs'>JohnDoe@company.com</Text>
+                  </Box>
+                </Stack>
+              </Box>
+              <Box height='80vh' overflowY='auto'>
+                <Stack w='100%' py={5}>
+                  <Link href='/'>
+                    <a onClick={onClose}>
+                      <Icon mr={2} as={MdDashboard} />
+                      Dashboard
+                    </a>
+                  </Link>
+                  <Center>
+                    <Divider w='80%' borderColor='secondary' />
+                  </Center>
+
+                  <Text as='h3' color='highlight' fontWeight='600' p={2}>
+                    UI Components
+                  </Text>
+                  <Link href='/forms'>
+                    <a onClick={onClose}>
+                      <Icon mr={2} as={MdDashboard} />
+                      Forms
+                    </a>
+                  </Link>
+                  <Link href='/tables'>
+                    <a onClick={onClose}>
+                      <Icon mr={2} as={RiTableAltFill} />
+                      Tables
+                    </a>
+                  </Link>
+                  <Link href='/cards'>
+                    <a onClick={onClose}>
+                      <Icon mr={2} as={AiFillIdcard} />
+                      Cards
+                    </a>
+                  </Link>
+                </Stack>
+              </Box>
+
+              <Box>
+                <Footer />
+              </Box>
+            </Stack>
+          </DrawerContent>
+        </DrawerOverlay>
+      </Drawer>
+    </>
+  )
+}

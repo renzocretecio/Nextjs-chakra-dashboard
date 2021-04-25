@@ -1,5 +1,5 @@
 import { Box, Flex, Container } from '@chakra-ui/react'
-import Sidebar from './sidebar'
+import Sidebar from './Sidebar'
 import { ResponsiveSidebar } from '../components/Drawer'
 const Layout = ({ children }) => {
   return (
